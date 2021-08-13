@@ -193,16 +193,21 @@ function countByRating(movies) {
       }
     ];
  */
-function getAllMoviesReleasedAtOrBeforeYear() {
-  // let arr = [];
-  // for (let movie of movies){
-  //   if(year >= movie.released){
-  //     arr.push(movie);
-  //   }else {
-  //     return [];
-  //   }
-  // }
-  // return arr;
+function getAllMoviesReleasedAtOrBeforeYear(movies, year) {
+  
+  let arr = [];
+  for (let movie of movies){
+    let splitted = movies.released.split(" ");
+    let realNumber = splitted[2];
+    let changedNumber = +realNumber;
+
+    if(year >= changedNumber){
+      arr.push(movie.title);
+    }else {
+      return [];
+    }
+  }
+  return arr;
 }
 
 /**
@@ -230,7 +235,7 @@ function getBiggestBoxOfficeMovie(movies) {
    if(currentNum > highest){
      highest = currentNum;
      if(highest){
-     total = movies.title;
+     total = Number(movies[i].title);
      }
     }
   }
