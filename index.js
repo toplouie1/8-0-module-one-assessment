@@ -193,16 +193,16 @@ function countByRating(movies) {
       }
     ];
  */
-function getAllMoviesReleasedAtOrBeforeYear(movies, year) {
-  let arr = [];
-  for (let movie of movies){
-    if(year >= movie.released){
-      arr.push(movie);
-    }else {
-      return [];
-    }
-  }
-  return arr;
+function getAllMoviesReleasedAtOrBeforeYear() {
+  // let arr = [];
+  // for (let movie of movies){
+  //   if(year >= movie.released){
+  //     arr.push(movie);
+  //   }else {
+  //     return [];
+  //   }
+  // }
+  // return arr;
 }
 
 /**
@@ -219,23 +219,22 @@ function getAllMoviesReleasedAtOrBeforeYear(movies, year) {
 
 
 function getBiggestBoxOfficeMovie(movies) {
- 
+  let total = "";
   if (movies.length === 0){
-    return null;
+    total = null;
   }
-
-  let highest = Number(movies[0].boxOffice);
-  let movieTitle = "";
-
-   for (let i = 0; i < movies.length; i++){
+   for (let i = 1; i < movies.length; i++){
+   let highest = Number(movies[0].boxOffice);
    let currentNum = Number(movies[i].boxOffice);
 
-   if(currentNum > highest ){
+   if(currentNum > highest){
      highest = currentNum;
-     movieTitle = movies[i].title;
+     if(highest){
+     total = movies.title;
+     }
     }
   }
-  return movieTitle;
+  return total;
 }
 
 // Do not change anything below this line.
