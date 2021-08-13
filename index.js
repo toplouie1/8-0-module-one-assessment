@@ -126,20 +126,20 @@ function countByRating(movies) {
       // Toy Story 4
     };
  */
-function findById(movies, id) {
 
-  if (movies.length === 0 || movies.imdbID === "") {
-    return null;
-  }
-
-  let obj = {};
-  for (let movie of movies){
-    if(movie.imdbID === id){
-      obj = movie;
+  function findById(movies, id) {
+    let moviesObj = {}; 
+  
+    if (movies.length === 0 || (!(movies.includes(id)))) {
+      moviesObj = null;
     }
+    for (let movie of movies) {
+      if (movie.imdbID === id) {
+        moviesObj = movie;
+      }
+    }
+    return moviesObj;
   }
-  return obj;
-}
 
 /**
  * filterByGenre()
@@ -161,17 +161,15 @@ function findById(movies, id) {
  *  filterByGenre(movies, "Horror")
  *  //> []
  */
-function filterByGenre(movies, genre) {
-  let arr = [];
-  let genreLower = genre[0].toUpperCase();
-
-  for (let movie of movies ){
-    if(movie.genre === genreLower ){
-      arr.push(movies);
+    function filterByGenre(movies,genre) {
+      let arr = [];
+      for (let movie of movies ){
+        if(movie.genre === genre){
+          arr.push(movie.title);
+        }
+      }
+      return arr;
     }
-  }
-  return arr;
-}
 
 /**
  * getAllMoviesReleasedAtOrBeforeYear()
@@ -195,7 +193,17 @@ function filterByGenre(movies, genre) {
       }
     ];
  */
-function getAllMoviesReleasedAtOrBeforeYear() {}
+function getAllMoviesReleasedAtOrBeforeYear(movies, year) {
+  let arr = [];
+  for (let movie of movies){
+    if(year >= movie.released){
+      arr.push(movie);
+    }else {
+      return [];
+    }
+  }
+  return arr;
+}
 
 /**
  * getBiggestBoxOfficeMovie()
@@ -209,32 +217,25 @@ function getAllMoviesReleasedAtOrBeforeYear() {}
  *  //> "Incredibles 2"
  */
 
- function gettingHighest(movies) {
-  let total = 0;
-  for (let i =0; i < movies.length ; i++){
-    total += +movies[i].boxOffice; 
-  }
-  return total ;
-}
 
 function getBiggestBoxOfficeMovie(movies) {
+ 
+  if (movies.length === 0){
+    return null;
+  }
 
-  let total = gettingHighest(movies); // this will bring me the total of box office.
+  let highest = Number(movies[0].boxOffice);
+  let movieTitle = "";
 
-  // if (movies.length === 0){
-  //   return null;
-  // }
-  // let highest = Number(movies[0].boxOffice);
-  // let movieTitle = "";
-  //  for (let i = 1; i < movies.length; i++){
+   for (let i = 0; i < movies.length; i++){
+   let currentNum = Number(movies[i].boxOffice);
 
-  // let currentNum = Number(movies[i].boxOffice);
-  //  if(currentNum > highest ){
-  //   //  highest = currentNum;
-  //   movieTitle = movie[i].title;
-  //  }
-  // }
-  // return movieTitle;
+   if(currentNum > highest ){
+     highest = currentNum;
+     movieTitle = movies[i].title;
+    }
+  }
+  return movieTitle;
 }
 
 // Do not change anything below this line.
